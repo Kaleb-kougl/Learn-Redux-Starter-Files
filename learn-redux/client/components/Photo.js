@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 import posts from '../data/posts';
@@ -6,7 +6,8 @@ import posts from '../data/posts';
 export const Photo = React.createClass({
   render() {
     const { caption, code, likes, } = this.props.post;
-    console.log(this.props.comments[code]);
+    const { i } = this.props;
+    // console.log(this.props.comments[code]);
 
     return (
       <figure className="grid-figure">
@@ -31,7 +32,7 @@ export const Photo = React.createClass({
             {caption}
           </p>
           <div className="control-buttons">
-            <button className="likes">&hearts; {likes}</button>
+            <button className="likes" onClick={this.props.increment.bind(null, i)}>&hearts; {likes}</button>
             <Link to={`/view/${code}`} className="button">
               <span className="comment-count">
                 <span className="speech-bubble" /> {this.props.comments[code] ? this.props.comments[code].length : 0}
